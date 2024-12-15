@@ -13,7 +13,11 @@ public abstract class Account implements IAccount{
     //behavior
     @Override
     public void Deposit(double amount) {
-    balance += amount;
+        if (amount > 0) {
+            balance += amount;
+        } else {
+            System.out.println("Insufficient Deposit");
+        }
     }
 
     @Override

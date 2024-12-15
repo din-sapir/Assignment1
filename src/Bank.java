@@ -19,23 +19,15 @@ public class Bank implements IBank {
 
     @Override
     public void CloseAccount(int accountNumber) {
-        // build new list without the number and change original list
-        boolean isAccount = false;
-        IAccount account2Remove = null;
-        for (IAccount account: accountList) {
+        for (IAccount account : accountList) {
             if (account.GetAccountNumber() == accountNumber) {
                 if (account.GetCurrentBalance() >= 0) {
-                    account2Remove = account;
-                    isAccount = true;
-                    break;
+                    accountList.remove(account);
                 } else {
                     System.out.println("Cannot close account " + accountNumber + " due to debt");
                 }
+                return;
             }
-        }
-        if (isAccount) {
-            this.accountList.remove(account2Remove);
-            return;
         }
     }
 

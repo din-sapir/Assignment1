@@ -41,19 +41,15 @@ public class Bank implements IBank {
     bank after the for loop is complete to avoid errors
     */
     public void CloseAccount(int accountNumber) {
-        List<IAccount> accountsToRemove = new ArrayList<>();
         for (IAccount account : accountList) {
             if (account.GetAccountNumber() == accountNumber) {
-                if (account.GetCurrentBalance() >= 0) {
-                    accountsToRemove.add(account);
-                } else {
+                if (account.GetCurrentBalance() < 0) {
                     System.out.println("Cannot close account " + accountNumber + " due to debt");
+                } else {
+                    accountList.remove(account);
                 }
-                break;
+                return;
             }
-        }
-        for (IAccount accountToRemove : accountsToRemove) {
-            accountList.remove(accountToRemove);
         }
     }
 
